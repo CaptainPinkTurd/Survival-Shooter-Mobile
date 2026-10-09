@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CaptainPinkTurd.UI.Popup;
+using UnityEngine;
 
 namespace CompleteProject
 {
@@ -8,6 +9,8 @@ namespace CompleteProject
         public int currentHealth;                   // The current health the enemy has.
         public float sinkSpeed = 2.5f;              // The speed at which the enemy sinks through the floor when dead.
         public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
+        public PopupText scorePopup;
+        public float scoreTextTargetHeight = 3f;
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
 
 
@@ -81,6 +84,9 @@ namespace CompleteProject
 
             // Tell the animator that the enemy is dead.
             anim.SetTrigger ("Dead");
+            
+            //Score text
+            scorePopup.InitializeText(scoreValue.ToString(), transform.position, scoreTextTargetHeight);
 
             // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
             enemyAudio.clip = deathClip;
