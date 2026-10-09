@@ -13,8 +13,7 @@ namespace GeekGame.Input{
 		public bool Fire{
 			get{return _fire;}
 		}
-
-
+		
 		void Awake(){
 
 			if(instance!=null){
