@@ -6,17 +6,18 @@ namespace CompleteProject
     public class PlayerMovementMobile : MonoBehaviour
     {
         public float speed = 6f;            // The speed that the player will move at.
-
-
+        
         Vector3 movement;                   // The vector to store the direction of the player's movement.
         Animator anim;                      // Reference to the animator component.
         Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
 
-
         void Awake ()
         {
-
-
+#if UNITY_EDITOR
+            enabled = false;
+#else
+            enabled = true;
+#endif
             // Set up references.
             anim = GetComponent <Animator> ();
             playerRigidbody = GetComponent <Rigidbody> ();
@@ -60,8 +61,6 @@ namespace CompleteProject
 
         void Turning ()
         {
-
-
             //Vector3 turnDir = new Vector3(CrossPlatformInputManager.GetAxisRaw("Mouse X") , 0f , CrossPlatformInputManager.GetAxisRaw("Mouse Y"));
 			Vector3 turnDir = new Vector3(JoystickRotate.instance.H , 0f , JoystickRotate.instance.V);
 
@@ -79,7 +78,6 @@ namespace CompleteProject
                 // Set the player's rotation to this new rotation.
                 playerRigidbody.MoveRotation(newRotatation);
             }
-
         }
 
 

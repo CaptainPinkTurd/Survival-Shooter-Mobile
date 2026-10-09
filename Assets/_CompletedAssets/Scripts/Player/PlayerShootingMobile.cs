@@ -9,8 +9,7 @@ namespace CompleteProject
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
-
-
+        
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay;                                   // A ray from the gun end forwards.
         RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
@@ -25,6 +24,11 @@ namespace CompleteProject
 
         void Awake ()
         {
+#if UNITY_EDITOR
+            enabled = false;
+#else
+            enabled = true;
+#endif
             // Create a layer mask for the Shootable layer.
             shootableMask = LayerMask.GetMask ("Shootable");
 

@@ -6,8 +6,7 @@ namespace CompleteProject
     public class PlayerMovement : MonoBehaviour
     {
         public float speed = 6f;            // The speed that the player will move at.
-
-
+        
         Vector3 movement;                   // The vector to store the direction of the player's movement.
         Animator anim;                      // Reference to the animator component.
         Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
@@ -18,6 +17,12 @@ namespace CompleteProject
 
         void Awake ()
         {
+#if UNITY_EDITOR
+            enabled = true;
+#else
+            enabled = false;
+#endif
+            
 #if !MOBILE_INPUT
             // Create a layer mask for the floor layer.
             floorMask = LayerMask.GetMask ("Floor");

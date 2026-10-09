@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using UnitySampleAssets.CrossPlatformInput;
 
 namespace CompleteProject
@@ -8,7 +9,6 @@ namespace CompleteProject
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
-
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay;                                   // A ray from the gun end forwards.
@@ -24,6 +24,12 @@ namespace CompleteProject
 
         void Awake ()
         {
+#if UNITY_EDITOR
+            enabled = true;
+#else
+            enabled = false;
+#endif
+            
             // Create a layer mask for the Shootable layer.
             shootableMask = LayerMask.GetMask ("Shootable");
 
@@ -43,7 +49,7 @@ namespace CompleteProject
 
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
-			if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+            if(Mouse.current.leftButton.isPressed && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
                 Shoot ();
